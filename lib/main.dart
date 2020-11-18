@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Cupertino App',
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
