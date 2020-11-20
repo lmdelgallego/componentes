@@ -11,7 +11,13 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(10),
-        children: [_cardTipo1()],
+        children: [
+          _cardTipo1(),
+          SizedBox(
+            height: 30,
+          ),
+          _cardTipo2()
+        ],
       ),
     );
   }
@@ -19,6 +25,7 @@ class CardPage extends StatelessWidget {
   Widget _cardTipo1() {
     return Card(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ListTile(
             leading: Icon(Icons.photo_album, color: Colors.blue),
@@ -33,6 +40,31 @@ class CardPage extends StatelessWidget {
               FlatButton(onPressed: () {}, child: Text('Ok')),
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _cardTipo2() {
+    return Card(
+      child: Column(
+        children: [
+          FadeInImage(
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            image: NetworkImage(
+                'https://loadedlandscapes.com/wp-content/uploads/2019/07/lighting-1280x720.jpg'),
+            fadeInDuration: Duration(milliseconds: 200),
+            height: 300,
+            fit: BoxFit.cover,
+          ),
+          // Image(
+          //   image: NetworkImage(
+          //       'https://loadedlandscapes.com/wp-content/uploads/2019/07/lighting-1280x720.jpg'),
+          // ),
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Text('Lorem ipsum dolor sit amet.'),
+          ),
         ],
       ),
     );
