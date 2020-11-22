@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class ListaPage extends StatefulWidget {
@@ -12,6 +14,7 @@ class _ListaPageState extends State<ListaPage> {
 
   List<int> _listaNumeros = new List();
   int _lastNumber = 0;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -21,9 +24,16 @@ class _ListaPageState extends State<ListaPage> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        _add10();
+        // _add10();
+        fetchData();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   @override
@@ -33,7 +43,10 @@ class _ListaPageState extends State<ListaPage> {
         appBar: AppBar(
           title: Text('Listas & Scroll'),
         ),
-        body: _crearLista(),
+        body: Stack(children: [
+          _crearLista(),
+          _loading(),
+        ]),
       ),
     );
   }
@@ -58,5 +71,43 @@ class _ListaPageState extends State<ListaPage> {
       _listaNumeros.add(_lastNumber);
     }
     setState(() {});
+  }
+
+  Future<Null> fetchData() async {
+    _isLoading = true;
+    setState(() {});
+    new Timer(Duration(seconds: 2), responseHttp);
+  }
+
+  void responseHttp() {
+    _isLoading = false;
+    _scrollController.animateTo(
+      _scrollController.position.pixels + 100,
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 250),
+    );
+    _add10();
+  }
+
+  Widget _loading() {
+    if (_isLoading) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          )
+        ],
+      );
+    } else {
+      return Container();
+    }
   }
 }
