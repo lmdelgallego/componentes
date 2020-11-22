@@ -12,7 +12,7 @@ Map<String, WidgetBuilder> getAplicationMainRoutes() {
   return <String, WidgetBuilder>{
     '/': (BuildContext contex) => HomePage(),
     'alert': (BuildContext contex) => AlertPage(),
-    'avatar': (BuildContext contex) => AvatarPage(),
+    AvatarPage.pageName: (BuildContext contex) => AvatarPage(),
     'card': (BuildContext contex) => CardPage(),
     'animatedContainer': (BuildContext contex) => AnimatedContainerPage(),
     'inputs': (BuildContext contex) => InputPage(),

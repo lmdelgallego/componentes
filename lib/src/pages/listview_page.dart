@@ -60,6 +60,8 @@ class _ListaPageState extends State<ListaPage> {
         itemBuilder: (BuildContext context, int index) {
           final image = _listaNumeros[index];
           return FadeInImage(
+            height: 300,
+            fit: BoxFit.cover,
             placeholder: AssetImage('assets/jar-loading.gif'),
             image: NetworkImage('https://picsum.photos/500/300?random=$image'),
           );
